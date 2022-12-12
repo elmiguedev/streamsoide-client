@@ -1,8 +1,5 @@
 <template>
-  <div>
-    el path: {{ JSON.stringify(currentPath) }}
-    <component :is="currentView" />
-  </div>
+  <component :is="currentView" />
 </template>
 
 <script>

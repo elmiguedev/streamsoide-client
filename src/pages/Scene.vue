@@ -1,11 +1,37 @@
 <template>
-  <div>
-    <h1>Scene</h1>
+  <div style="padding: 0; margin: 0; width: 100%; height: 100%; display: flex">
+    <div v-if="comment" style="width: 50%; margin-top: auto">
+      <p style="background: white; padding: 16px">
+        <strong style="background: blue; color: white; padding: 8px"
+          >{{ comment.user }}:
+        </strong>
+        <span style="padding: 8px">{{ comment.message }}</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import io from "socket.io-client";
+
+const serverUrl = "ws://localhost:3000";
+const socket = io(serverUrl);
+
+export default {
+  data() {
+    return {
+      comment: null,
+    };
+  },
+  mounted() {
+    socket.on("comment:show", (comment) => {
+      this.comment = comment;
+    });
+    socket.on("comment:clear", () => {
+      this.comment = null;
+    });
+  },
+};
 </script>
 
 <style>
