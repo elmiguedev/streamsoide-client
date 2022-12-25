@@ -5,7 +5,7 @@
         <strong style="background: blue; color: white; padding: 8px"
           >{{ comment.user }}:
         </strong>
-        <span style="padding: 8px">{{ comment.message }}</span>
+        <span v-html="comment.message" style="padding: 8px"></span>
       </p>
     </div>
   </div>
@@ -14,7 +14,7 @@
 <script>
 import io from "socket.io-client";
 
-const serverUrl = "ws://localhost:3000";
+const serverUrl = "ws://localhost:5001";
 const socket = io(serverUrl);
 
 export default {
